@@ -1,0 +1,53 @@
+﻿@model User
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Удалить пользователя</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3 row p-1">
+            <label asp-for="Name" class="p-0">Имя</label>
+            @* отвечает свойства которые определены в мадели *@
+            <input asp-for="Name" disabled class="form-control" />
+
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Surname" class="p-0">Фамилия</label>
+            @* отвечает за свойства которые определенны в мадели *@
+            <input asp-for="Surname" disabled class="form-control" />
+
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Login" class="p-0">Логин</label>
+            @* отвечает за свойства которые определенны в мадели *@
+            <input asp-for="Login" disabled class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Password" class="p-0">Пароль</label>
+            @* отвечает за свойства которые определенны в мадели *@
+            <input asp-for="Password" disabled class="form-control" />
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="Role" class="p-0">Роль</label>
+            @* отвечает за свойства которые определенны в мадели *@
+            <input asp-for="Role" disabled class="form-control" />
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-danger form-control">Удалить</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Account" asp-action="Index" class="btn btn-secobdary border form-control">
+                    Назад
+                </a>
+            </div>
+        </div>
+
+    </div>
+</form>

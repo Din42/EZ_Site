@@ -1,0 +1,135 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Dice Game";
+    var login = ViewBag.Login;
+}
+
+<h2 class="game-title">Добро пожаловать в игру в кости, @ViewBag.Login!</h2>
+<p class="game-intro">Готовы проверить свою удачу? Бросьте кости и посмотрите, сможете ли вы победить своего противника!</p>
+
+<div class="game-container">
+    <button id="startGameBtn" class="game-button" onclick="startDiceGame()">🎲 Бросьте кости 🎲</button>
+</div>
+
+<div id="diceResults" class="dice-results" style="display:none;">
+    <div class="result-section">
+        <p>Ваш брасок:</p>
+        <div class="dice-face" id="userDice"></div>
+    </div>
+    <div class="result-section">
+        <p>Брасок апонента:</p>
+        <div class="dice-face" id="opponentDice"></div>
+    </div>
+    <h3 id="winnerAnnouncement" class="winner-announcement"></h3>
+</div>
+
+<link rel="stylesheet" href="~/css/styles.css">
+<script src="~/js/diceGame.js"></script>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        text-align: center;
+        padding: 50px;
+    }
+
+    .game-title {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    .game-intro {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        color: #7f8c8d;
+    }
+
+    .game-container {
+        margin: 30px 0;
+    }
+
+    .game-button {
+        padding: 10px 20px;
+        font-size: 1.5em;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .game-button:hover {
+            background-color: #2980b9;
+        }
+
+    .dice-results {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .result-section {
+        margin: 0 20px;
+    }
+
+    .dice-face {
+        font-size: 3em;
+        margin-top: 10px;
+        padding: 20px;
+        border: 2px solid #2c3e50;
+        border-radius: 10px;
+        background-color: #ecf0f1;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .winner-announcement {
+        margin-top: 30px;
+        font-size: 1.5em;
+        color: #e74c3c;
+    }
+</style>
+
+<script>
+    function startDiceGame() {
+        document.getElementById("startGameBtn").style.display = "none";
+        document.getElementById("diceResults").style.display = "flex";
+
+        var userRoll = rollDice();
+        var opponentRoll = rollDice();
+
+        document.getElementById("userDice").textContent = userRoll;
+        document.getElementById("opponentDice").textContent = opponentRoll;
+
+        determineDiceWinner(userRoll, opponentRoll);
+    }
+
+    function rollDice() {
+        return Math.floor(Math.random() * 6) + 1;
+    }
+
+    function determineDiceWinner(userRoll, opponentRoll) {
+        var winnerAnnouncement = document.getElementById("winnerAnnouncement");
+
+        if (userRoll > opponentRoll) {
+            winnerAnnouncement.textContent = "🎉 Поздравляю, вы победили.!";
+            winnerAnnouncement.style.color = "#2ecc71";
+        } else if (userRoll < opponentRoll) {
+            winnerAnnouncement.textContent = "😞 Извините, ваш противник победил.";
+            winnerAnnouncement.style.color = "#e74c3c";
+        } else {
+            winnerAnnouncement.textContent = "🤝 Это ничья.!";
+            winnerAnnouncement.style.color = "#f39c12";
+        }
+
+        document.getElementById("startGameBtn").textContent = "Играть снова";
+        document.getElementById("startGameBtn").style.display = "block";
+    }
+</script>

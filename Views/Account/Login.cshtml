@@ -1,0 +1,40 @@
+﻿@model User
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>@ViewBag.Title Вход</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="Login" class="form-label">Логин</label>
+                            <input asp-for="Login" class="form-control" />
+                            <span asp-validation-for="Login" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label">Пароль</label>
+                            <input asp-for="Password" type="password" name="password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Войти</button>
+                        </div>
+                        <a asp-controller="Home" asp-action="Index"></a>
+                    </form>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @ViewData.ModelState[""].Errors.FirstOrDefault()?.ErrorMessage
+                        </div>
+                    }
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">У вас нет учетной записи? <a href="/Account/Register">Зарегистрироватся</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
